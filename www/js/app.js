@@ -3,11 +3,11 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+var app = angular.module('starter', ['ionic']);
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
+app.run(function ($ionicPlatform) {
+  $ionicPlatform.ready(function () {
+    if (window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -17,8 +17,53 @@ angular.module('starter', ['ionic'])
       // a much nicer keyboard experience.
       cordova.plugins.Keyboard.disableScroll(true);
     }
-    if(window.StatusBar) {
+    if (window.StatusBar) {
       StatusBar.styleDefault();
     }
   });
+})
+
+//Configuring States
+app.config(function ($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('index', {
+      url: '/home',
+      templateUrl: 'view/home.html'
+    })
+    .state('incomes', {
+      url: '/incomes',
+      templateUrl: 'view/incomes.html',
+      controller: 'IncomesCtrl'
+    })
+    .state('bills', {
+      url: '/bills',
+      templateUrl: 'view/bills.html',
+      controller: 'BillsCtrl'
+    })
+    .state('planning', {
+      url: '/planning',
+      templateUrl: 'view/planning.html',
+      controller: 'PlanningCtrl'
+    })
+    .state('forms', {
+      url: '/forms',
+      templateUrl: 'view/forms.html',
+      controller: 'FormsCtrl'
+    })
+    .state('editForm', {
+      url: '/editForm',
+      templateUrl: 'view/editForm.html',
+      controller: 'FormsCtrl',
+      params: {
+
+        product: null,
+        value: 0,
+        installments: 0
+
+      }
+    })
+
+  $urlRouterProvider.otherwise('/')
+
+
 })

@@ -31,15 +31,40 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    <!-- Controllers -->
+    <script src="js/controllers/incomes.controller.js"></script>
+    <script src="js/controllers/bills.controller.js"></script>
+    <script src="js/controllers/planning.controller.js"></script>
+    <script src="js/controllers/forms.controller.js"></script>
+    <!-- Services -->
+    <script src="js/services/bills.service.js"></script>
+    <script src="js/services/data-management.service.js"></script>
+    <script src="js/services/planning.service.js"></script>
+    <script src="js/services/incomes.service.js"></script>
   </head>
   <body ng-app="starter">
 
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+ <ion-pane>
+      <ion-header-bar class="bar-assertive">
+        <h1 class="title" style="text-align:center">{{title}}</h1>
+        <a class="button icon ion-plus-circled" href="#/forms"></a>
       </ion-header-bar>
-      <ion-content>
-      </ion-content>
+      <div class="tabs tabs-assertive">
+        <a class="tab-item" href="#/home">
+          Home
+        </a>
+        <a class="tab-item" href="#/incomes">
+          Incomes
+        </a>
+        <a class="tab-item" href="#/bills">
+          Bills
+        </a>
+        <a class="tab-item" href="#/planning">
+          Planning
+        </a>
+      </div>
+      <ion-nav-view></ion-nav-view>
     </ion-pane>
+
   </body>
 </html>

@@ -1,0 +1,21 @@
+<ion-view>
+    <ion-content class="has-header has-tabs">
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" ng-model="dataForm.name" placeholder={{selectedData.product}}>
+        </label>
+        <label class="item item-input">
+          <input type="text" ng-model="dataForm.value" value={{selectedData.value}}>
+        </label>
+        <label class="item item-input">
+          <input type="text" ng-model="dataForm.installments" value={{selectedData.installments}}>
+        </label>
+        <label>
+          <div style="padding:10px">
+            <button class="button button-block button-assertive" ng-click="submitEditedData(dataForm)">Edit</button>
+          </div>
+        </label>
+      </div>
+    </ion-content>
+  </ion-view>
+  

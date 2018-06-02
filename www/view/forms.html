@@ -1,0 +1,20 @@
+<ion-view>
+  <ion-content class="has-header has-tabs">
+    <div class="list">
+      <label class="item item-input">
+        <input type="text" ng-model="dataForm.name" placeholder="Name">
+      </label>
+      <label class="item item-input">
+        <input type="text" ng-model="dataForm.value" placeholder="Value">
+      </label>
+      <label ng-show="isBills" class="item item-input">
+        <input type="text" ng-model="dataForm.installments" placeholder="How many installments?">
+      </label>
+      <label>
+        <div style="padding:10px">
+          <button class="button button-block button-assertive" ng-click="submitDataToDatabase(dataForm)">Submit</button>
+        </div>
+      </label>
+    </div>
+  </ion-content>
+</ion-view>
