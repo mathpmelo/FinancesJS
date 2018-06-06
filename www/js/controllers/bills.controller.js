@@ -36,7 +36,8 @@ app.controller("BillsCtrl", function ($scope, $rootScope, $http, DataManagement,
     $state.go('editForm', {
       product: bill.produto,
       value: bill.valor,
-      installments: bill.parcelas
+      installments: bill.parcelas,
+      date: bill.data
     })
   };
 

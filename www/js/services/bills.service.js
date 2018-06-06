@@ -8,7 +8,7 @@ app.factory('BillsService', function ($http, $q, DataManagement) {
 
       q.resolve(response.data);
     }, () => {
-      console.log("Aconteceu um Erro");
+      console.log("An error occured");
     })
     return q.promise
   }

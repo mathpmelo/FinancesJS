@@ -1,20 +1,28 @@
 <ion-view>
     <ion-content class="has-header has-tabs">
+      <h3 style="text-align:center; margin-top:10px">{{selectedData.product}}</h3>
       <div class="list">
+   
         <label class="item item-input">
-          <input type="text" ng-model="dataForm.name" placeholder={{selectedData.product}}>
+          <div style="font-weight:bold">Value</div>
         </label>
         <label class="item item-input">
-          <input type="text" ng-model="dataForm.value" value={{selectedData.value}}>
+          <input type="number" ng-model="dataForm.value">
+          <!-- <input type="number" ng-model="dataForm.value" placeholder="{{selectedData.value}}"> -->
         </label>
         <label class="item item-input">
-          <input type="text" ng-model="dataForm.installments" value={{selectedData.installments}}>
+          <div style="font-weight:bold">Installments</div>
+        </label>
+        <label class="item item-input">
+          <input type="text" ng-model="dataForm.installments" placeholder="{{selectedData.installments}}">
+          <!-- <input type="text" ng-model="dataForm.installments" placeholder="{{selectedData.installments}}"> -->
         </label>
         <label>
           <div style="padding:10px">
             <button class="button button-block button-assertive" ng-click="submitEditedData(dataForm)">Edit</button>
           </div>
         </label>
+        <p style="text-align:center"> *Leave blank if unchanged.</p>
       </div>
     </ion-content>
   </ion-view>

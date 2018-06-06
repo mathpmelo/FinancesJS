@@ -4,12 +4,13 @@ app.controller('FormsCtrl', function ($scope, $rootScope, $http, $q, IncomesServ
     if ($stateParams.product != null) {
       $rootScope.title = "Edit bill"
       $scope.selectedData = {
-        product: "Product:" + $stateParams.product,
+        product: $stateParams.product,
         value: "Value: " + $stateParams.value,
         installments: "Installments: " + $stateParams.installments
       }
+      
     }
-  //Check what view the user was before to change the fields in the form using ng-show
+    //Check what view the user was before to change the fields in the form using ng-show
     if ($rootScope.title == "Bills") {
 
       $rootScope.title = "Add new bill"
@@ -23,6 +24,11 @@ app.controller('FormsCtrl', function ($scope, $rootScope, $http, $q, IncomesServ
     }
 
   })
+  $scope.dataForm = {};
+  $scope.dataForm.value = $stateParams.value;
+  $scope.dataForm.installments = $stateParams.installments;
+
+
   if ($rootScope.title == "Bills") {
     $scope.submitDataToDatabase = function (dataForm) {
       var currentDate = new Date();
@@ -52,16 +58,22 @@ app.controller('FormsCtrl', function ($scope, $rootScope, $http, $q, IncomesServ
   }
 
   $scope.submitEditedData = function (dataForm) {
-    var bills = {
-      produto: dataForm.name,
-      valor: dataForm.value,
-      parcelas: dataForm.installments
-    }
 
-    BillsService.callPutMethod(bills, "conta").then(() => {
-      console.log("Edited - Ctrl")
-    })
-  }
+    var bills = {}
+    bills.produto = $stateParams.product;
+    if (dataForm.value == undefined || dataForm.value == "") bills.valor = $stateParams.value;
+    else bills.valor = dataForm.value;
+    
+    if (dataForm.installments == undefined || dataForm.installments == "") bills.parcelas = $stateParams.installments;
+    else bills.parcelas = dataForm.installments;
+
+    bills.data = $stateParams.date;
+   
+  BillsService.callPutMethod(bills, "conta").then(() => {
+    console.log("Edited - Ctrl")
+    //console.log(bills);
+  })
+}
 
 
 });

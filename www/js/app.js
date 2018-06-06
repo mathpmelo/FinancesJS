@@ -58,8 +58,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
         product: null,
         value: 0,
-        installments: 0
-
+        installments: 0,
+        date: null
       }
     })
 
