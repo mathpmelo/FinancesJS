@@ -1,20 +1,47 @@
 app.factory('PlanningService', function ($http, DataManagement, $q, BillsService) {
 
-  function verifyIfMonthHasChanged(bills) {
+  function verifyIfMonthHasChanged(bill) {
+    var actualDate = new Date();
     //If month has changed decrease one installment from each bill
-   // if(bills.data.get)
+
+    //Intanciate the data attribute of each object in the bill array
+    bill.forEach(e => {
+      e.data = new Date(e.data)
+    })
+
+
+    //If initialMonth is less than actual month modify the array decreasing one installment.
+    bill.forEach(e => {
+      if (e.data.getMonth() < actualDate.getMonth()) {
+        console.log("MONTH HAS CHANGED")
+        //console.log("Initial month of bill " + e.produto + " : " + e.data.getMonth() + " | Actual Month: " + actualDate.getMonth())
+        e.parcelas -= 1
+        updateInstallmentsAmount(e)
+        console.log("========================")
+      } else console.log("STILL SAME MONTH, Initial month of bill " + e.produto + " : " + e.data.getMonth() + " | Actual Month: " + actualDate.getMonth())
+    })
+
   }
 
+  function updateInstallmentsAmount(bill) {
+    //console.log(bill.parcelas) 
+
+    BillsService.callPutMethod(bill, "conta").then(() => {
+      console.log("Edited - Month has changed - Installments Decreased")
+    })
+  }
 
   function loadBillsAndIncomes() {
     var q = $q.defer();
     DataManagement.getData("conta").then(conta => {
       DataManagement.getData("renda").then(renda => {
+        verifyIfMonthHasChanged(conta.data)
         var obj = {};
         //Call function to deal with the data
         obj.actual = calculateActualRemaining(renda.data, conta.data);
         obj.next = calculateProjection(renda.data, conta.data);
 
+        //debugger;
         q.resolve(obj);
       })
     }, () => {
@@ -41,6 +68,7 @@ app.factory('PlanningService', function ($http, DataManagement, $q, BillsService
   }
 
   function calculateProjection(income, bill) {
+
     var sumMonth = 0;
     var data = new Date();
     var actualMonth = data.getMonth();
@@ -116,7 +144,7 @@ app.factory('PlanningService', function ($http, DataManagement, $q, BillsService
 
 
   return {
-
+    verifyIfMonthHasChanged: verifyIfMonthHasChanged,
     loadBillsAndIncomes: loadBillsAndIncomes,
     calculateActualRemaining: calculateActualRemaining,
     calculateProjection: calculateProjection,

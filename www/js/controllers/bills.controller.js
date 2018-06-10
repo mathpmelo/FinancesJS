@@ -13,6 +13,7 @@ app.controller("BillsCtrl", function ($scope, $rootScope, $http, DataManagement,
   var loadBills = function () {
     BillsService.callGetMethod().then(response => {
       $scope.bills = response;
+      //debugger;
     });
 
   };
