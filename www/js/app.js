@@ -27,8 +27,9 @@ app.run(function ($ionicPlatform) {
 app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('index', {
-      url: '/home',
-      templateUrl: 'view/home.html'
+      url: '/about',
+      templateUrl: 'view/about.html',
+      controller: 'AboutCtrl'
     })
     .state('incomes', {
       url: '/incomes',
@@ -63,7 +64,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       }
     })
 
-  $urlRouterProvider.otherwise('/')
+  $urlRouterProvider.otherwise('/planning')
 
 
 })
